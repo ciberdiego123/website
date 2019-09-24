@@ -232,7 +232,7 @@ Nothing to declare but only have access to {{< java "org.seedstack.business.doma
 
 ```java
 public interface ProductRepository extends Repository<Product, ProductId> {
-    default List<Product> discontinuedProducts() {
+    default Stream<Product> discontinuedProducts() {
         return get(getSpecificationBuilder().of(Product.class)
                 .property("discontinued").equalTo(true)
                 .build()
@@ -247,7 +247,7 @@ The repository interface:
 
 ```java
 public interface ProductRepository extends Repository<Product, ProductId> {
-     List<Product> discontinuedProducts();    
+     Stream<Product> discontinuedProducts();    
 }
 ```
 
@@ -258,7 +258,7 @@ public class ProductJpaRepository
         extends BaseInMemoryRepository<Product, ProductId> 
         implements ProductRepository {   
     @Override
-    public List<Product> discontinuedProducts() {
+    public Stream<Product> discontinuedProducts() {
         // in-memory implementation of the query 
     }    
 }
